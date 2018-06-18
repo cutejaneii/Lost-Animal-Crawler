@@ -4,6 +4,10 @@ from ptt_crawler import crawl
 import json
 app = Flask(__name__)
 
+@app.route('/', methods=['GET'])
+def index():    
+    return 'Hello, World! This is Lost-Animal-Crawler app.'
+
 @app.route('/find_by_keyword', methods=['GET'])
 def find_by_keyword():    
     keyword = request.args.get('keyword')
