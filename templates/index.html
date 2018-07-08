@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>  
+    <head>  
+        <meta charset="utf-8">  
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+        <script src="../static/loading/jquery-3.3.1.min.js"></script>
+        <script src="../static/loading/jquery.blockUI.js"></script>
+        <link rel="stylesheet" type="text/css" href="../static/semantic/semantic.min.css">
+        <link rel="stylesheet" type="text/css" href="../static/semantic/components/reset.min.css">
+        <link rel="stylesheet" type="text/css" href="../static/semantic/components/site.css">
+        <link rel="stylesheet" type="text/css" href="../static/semantic/components/grid.min.css">
+        <link rel="stylesheet" type="text/css" href="../static/semantic/components/image.min.css">
+        <link rel="stylesheet" type="text/css" href="../static/semantic/components/card.min.css">
+        <link rel="stylesheet" type="text/css" href="../static/semantic/components/label.min.css">
+        <link rel="stylesheet" type="text/css" href="../static/semantic/components/button.min.css">
+        <link rel="stylesheet" type="text/css" href="../static/semantic/components/item.min.css">
+        <link rel="stylesheet" type="text/css" href="../static/semantic/components/reveal.min.css">
+        <link rel="stylesheet" type="text/css" href="../static/semantic/components/rating.min.css">
+        <link rel="stylesheet" type="text/css" href="../static/semantic/components/transition.min.css">
+        <link rel="stylesheet" type="text/css" href="../static/semantic/components/header.min.css">
+        <link rel="stylesheet" type="text/css" href="../static/semantic/components/popup.min.css">
+        <link rel="stylesheet" type="text/css" href="../static/semantic/components/dropdown.min.css">
+        <link rel="stylesheet" type="text/css" href="../static/semantic/components/loader.min.css">
+        <link rel="stylesheet" type="text/css" href="../static/semantic/components/dimmer.min.css">
+        <link rel="stylesheet" type="text/css" href="../static/loading/jquery.loading.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Concert+One|Dosis|Gloria+Hallelujah" rel="stylesheet">
+        
+        
+        
+        <script type="text/html" src="../static/semantic/semantic.min.js"></script>
+        <script type="text/html" src="../static/semantic/components/dropdown.min.js"></script>
+        <script type="text/html" src="../static/loading/jquery.blockUI.js"></script>
+        <script type="text/html" src="../static/semantic/semantic.min.js"></script>
+        <script type="text/html" src="../static/semantic/components/dropdown.min.js"></script>
+
+        <script type="text/html" src="../static/semantic/components/dimmer.min.js"></script>
+        <script type="text/html" src="../static/semantic/components/popup.min.js"></script>
+        <script type="text/html" src="../static/semantic/components/transition.min.js"></script>
+        <script type="text/html" src="../static/semantic/components/rating.min.js"></script>
+        <script type="text/html" src="../static/semantic/components/site.min.js"></script>
+        <script src="../static/semantic/assets/library/iframe-content.js"></script>
+
+
+        <title>Lost-Animal-Crawler ❤ 寵物走失協尋 
+        </title>  
+        <style>
+        .bottomright {
+        position: absolute;
+        bottom: 2px;
+        right: 2px;
+        background-color:#004466;
+        color:snow;
+        font-size: 18px;
+        }
+        </style>
+
+    </head>  
+    <body style="background-image: url('../static/img/cat2.jpg');background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;">
+        <div>
+                
+        <!--<div><h2 style="font-family:Dosis"><font color="White">Lost-Animal-Crawler ❤ 寵物走失協尋</font></h2></div>-->
+        <!--<div style="height:26pt"><h2 style="font-family:Gloria Hallelujah"><font color="White">Lost-Animal-Crawler ❤ 寵物走失協尋</font></h2></div>-->
+        <!--<div><h2 style="font-family:Concert One"><font color="White">Lost-Animal-Crawler ❤ 寵物走失協尋</font></h2></div>-->
+
+        <div class="ui menu" style="background-color: rgba(0, 255, 255, 0.5)">
+          <a class="item"><h3 style="font-family:Gloria Hallelujah">Lost-Animal-Crawler ❤ 寵物走失協尋</h3> </a>
+          <div class="right menu">
+            <a class="item" style="background-color: rgba(0, 255, 255, 0.65)"><font color="white">走失拾獲協尋</font></a>
+            <!--<div class="item"><font color="white">拾獲</font></div>-->
+            <div class="item"><font color="white">訂閱通知</font></div>
+            <a class="item" href="/about"><font color="white">關於</font></a>
+          </div>
+        </div>
+        <!--<div class="ui divider"></div>-->
+        <div id="div_Lost" style="background-color:rgba(0, 0, 0, 0.7); color:white;">
+        <div id="div_Lost_Search">
+                <form class="ui form">
+                        <div class="three fields">
+                            <div class="three wide field">
+                                <label>搜尋類型</label>
+                                <select class="ui fluid dropdown" id="ddlSearchCategory">
+                              <option value="s01" selected>走失</option>
+                              <option value="s02">拾獲</option>
+                                </select>
+                              </div>
+                          <div class="three wide field">
+                            <label>寵物類別</label>
+                            <select class="ui fluid dropdown" disabled>
+                          <option value="AL">不限</option>
+                          <option value="AK" selected>貓</option>
+                          <option value="AZ">狗</option>
+                            </select>
+                          </div>
+                          <div class="three wide field">
+                                <label>性別</label>
+                                <select class="ui fluid dropdown" disabled>
+                              <option value="AL" selected>不限</option>
+                              <option value="AK">男生</option>
+                              <option value="AZ">女生</option>
+                                </select>
+                              </div>
+                              <div class="four wide field">
+                                  <font color="white">關鍵字</font>
+                                    <input id="txtKeyword" type="text" name="shipping[keyword]" placeholder="關鍵字">
+                                  </div>
+                                  
+                                  <div class="three wide field"><font color="white"> </font><br/><div id="btnSearch_Lost" class="ui button" tabindex="0">查詢</div></div>
+                          </div>
+        </div>
+        <div class="ui divider"></div>
+        <div class="ui yellow message" id="divResultRows" style="visibility: hidden">
+          查詢結果: 筆數50
+        </div>
+        <div style="visibility: hidden" id="ptt_pageno"></div>
+
+        <div id="div_Lost_Result">
+          <div class="ui special cards" id="divCards">
+          </div>
+        </div>
+
+      </div>
+
+        </div>
+                        
+                      </form>
+                    </div>
+        </div>
+</div>
+
+
+    </body>
+    <script type="text/javascript"> 
+    $(document).ready(function(){
+
+        function GetCardTemplate(info)
+        {
+         var card_ele = '<a class="card" target="_blank" href='+ info.url +'>';
+            card_ele += '<div class="blurring dimmable image">';
+              card_ele += '<div class="ui inverted dimmer">';
+                card_ele += '<div class="content">';
+                  card_ele += '<div class="center">';
+                      card_ele += '<div class="ui primary button">Add Friend</div>';
+                      card_ele += '</div>';
+                      card_ele += '</div>';
+                      card_ele += '</div>';
+                     card_ele += '<img class="medium" src='+ info.photo_url +'>';
+
+
+card_ele += '<div class="bottomright">'+ info.photo_desc +'</div>';
+
+                      card_ele += '</div>';
+                      card_ele += '<div class="content">'+info.title;
+                        card_ele += '<div class="meta">';
+                          card_ele += '<span class="date">';
+                          card_ele += info.article_content;
+                          card_ele +='</span>';
+                          card_ele += '</div>';
+                          card_ele += '</div>';
+                          card_ele += '<div class="extra content">';
+                            card_ele += '<span class="right floated">';
+                              card_ele += info.post_date;
+                              card_ele += '</span>';
+                              card_ele += '<span>';
+                              card_ele += info.from_web;
+                              card_ele += '</span>';
+                              card_ele += '</div>';
+                              card_ele += '</a>';
+                              return card_ele;
+        }
+
+        function GetLostResult()
+        {
+
+
+        }
+
+        $("#btnSearch_Lost").click(function(){
+
+          $("#div_Lost").block({ message:"Searching....",
+          css: { 
+            border: 'none', 
+            padding: '15px', 
+            backgroundColor: '#004466', 
+            '-webkit-border-radius': '10px', 
+            '-moz-border-radius': '10px', 
+            opacity: .5, 
+            color: '#fff' 
+        } });
+          $(".divLoader").attr("myLoader", "visible");
+          var $cardContainer = $("#divCards");
+          var $container = $("#div_Result");;
+          $cardContainer.empty();
+
+          $.post("/find_by_keyword?keyword="+$("#txtKeyword").val()+"&findCategory="+$("#ddlSearchCategory").val(), {}, function(data){
+
+            $.each(data, function (index, value) {
+              //$container.append(value);
+
+
+              $cardContainer.append(GetCardTemplate(value));
+
+            });
+
+            $('#div_Lost').unblock();
+
+          }, "json");
+
+        });
+
+       
+    })
+    </script>
+</html>
