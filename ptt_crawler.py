@@ -134,7 +134,7 @@ def crawl(keyword, findCategory):
         fit_titles.append('拾獲')
         remove_titles.append('已找到主人')
 
-    for x in range(ppt_index-42, ppt_index):
+    for x in range(ppt_index-32, ppt_index):
         print('https://www.ptt.cc/bbs/cat/index'+ str(x) +'.html')
         ptt_soup = crawl_data('https://www.ptt.cc/bbs/cat/index'+ str(x) +'.html')
         
