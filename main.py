@@ -1,27 +1,36 @@
 # -*- coding: utf-8 -*-
-import os
-from flask import Flask,request
+from flask import Flask,request, render_template
 from ptt_crawler import crawl
 import json
+from pyClass import SearchInfo
 app = Flask(__name__)
+
 
 @app.route('/', methods=['GET'])
 def index():    
-    return 'Hello, World! This is Lost-Animal-Crawler app.'
+    return render_template('index.html')
 
-@app.route('/find_by_keyword', methods=['GET'])
+@app.route('/about', methods=['GET'])
+def about():    
+    return render_template('about.html')
+
+@app.route('/find_by_keyword', methods=['POST'])
 def find_by_keyword():    
-    keyword = request.args.get('keyword')
-    data = crawl(keyword.encode('utf-8'))
-    return_data='Keyword=' + keyword.encode('utf-8') + '\n\n'
-    for i in range(0, len(data)):
-        return_data += data[i] + '\n\n'
+    return_data=[]
+    try:
+        keyword = request.args.get('keyword')
+        findCategory = request.args.get('findCategory')
+        data = crawl(keyword.encode('utf-8'), findCategory)
+        
+        for i in range(0, len(data)):
+            return_data.append({'photo_desc': data[i].photo_desc, 'from_web': data[i].from_web, 'article_content': data[i].article_content ,'title':data[i].title, 'url':data[i].url, 'photo_url':data[i].photo_url, 'post_date': str(data[i].post_date)})
+        print(return_data)
+    except Exception as ee:
+        print(str(ee))
+    return json.dumps(return_data, ensure_ascii=False)
 
-    return return_data
 
 if __name__ ==  '__main__':
-        #port = int(os.environ.get("PORT", 5000))
-        #app.run(debug=True, host='0.0.0.0', port=port)
         app.run(debug=True)
 
 
