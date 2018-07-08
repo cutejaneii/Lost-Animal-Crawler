@@ -5,6 +5,10 @@ To crawl websites for getting lost animal information. (not finished, developed 
 
 ## How to use
 
+Decide your keyword, then start to search.....
+![alt text](https://github.com/cutejaneii/Lost-Animal-Crawler/blob/master/img1.png)
+
+![alt text](https://github.com/cutejaneii/Lost-Animal-Crawler/blob/master/img2.png)
 
 
 ## What we do
