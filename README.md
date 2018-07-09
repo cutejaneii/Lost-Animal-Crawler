@@ -8,7 +8,8 @@ To crawl websites for getting lost animal information. (not finished, developed 
 This version will only search 31 pages from [PPT CAT Forum](https://www.ptt.cc/bbs/cat/index.html/). You should able to search previous pages in next version.
 
 2. Multi-thread
-3. replace "POST DATE" into real date while article had been posted.
+3. Replace "POST DATE" into real date while article had been posted.
+4. To crawl other lost-animal related websites.
 
 ## How to use
 
