@@ -175,6 +175,7 @@ def crawl(keyword, findCategory, pageno):
         fit_titles.append('拾獲')
         remove_titles.append('已找到主人')
 
+<<<<<<< HEAD
     for x in range(0, 10):
         to_pageno = ppt_index - (10*x) 
         from_pageno = ppt_index - (10*(x+1))+1 
@@ -186,6 +187,15 @@ def crawl(keyword, findCategory, pageno):
     
     for _ in range(len(threads)):
         q.join()
+=======
+    for x in range(ppt_index-32, ppt_index):
+        print('https://www.ptt.cc/bbs/cat/index'+ str(x) +'.html')
+        ptt_soup = crawl_data('https://www.ptt.cc/bbs/cat/index'+ str(x) +'.html')
+        
+        return_data = get_ptt_fit_data(ptt_soup, fit_titles, 'https://www.ptt.cc',remove_titles)
+        return_data = [data for data in return_data if keyword in data.title]
+        results.extend(return_data)
+>>>>>>> 6738098b602fb67c2bfc78c17c1fed39680ed359
 
     for _ in range(len(threads)):
         results.extend(q.get()) # 取出 queue 裡面的資料
