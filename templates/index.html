@@ -40,7 +40,7 @@
         <script type="text/html" src="../static/semantic/components/transition.min.js"></script>
         <script type="text/html" src="../static/semantic/components/rating.min.js"></script>
         <script type="text/html" src="../static/semantic/components/site.min.js"></script>
-        <script src="../static/semantic/assets/library/iframe-content.js"></script>
+        <script src="../static/semantic/library/iframe-content.js"></script>
 
 
         <title>Lost-Animal-Crawler ❤ 寵物走失協尋 
@@ -111,15 +111,15 @@
                                   
                                   <div class="three wide field"><font color="white"> </font><br/><div id="btnSearch_Lost" class="ui button" tabindex="0">查詢</div></div>
                           </div>
-        </div>
+        </div><div style="visibility:hidden" id="pageno">0</div>
         <div class="ui divider"></div>
-        <div class="ui yellow message" id="divResultRows" style="visibility: hidden">
-          查詢結果: 筆數50
-        </div>
-        <div style="visibility: hidden" id="ptt_pageno"></div>
-
         <div id="div_Lost_Result">
           <div class="ui special cards" id="divCards">
+          </div>
+          <div class="ui compact menu" id='btnNextSearch'>
+            <div class="active item link">
+              Next
+            </div>
           </div>
         </div>
 
@@ -137,6 +137,8 @@
     <script type="text/javascript"> 
     $(document).ready(function(){
 
+      $("#btnNextSearch").hide();
+
         function GetCardTemplate(info)
         {
          var card_ele = '<a class="card" target="_blank" href='+ info.url +'>';
@@ -148,10 +150,10 @@
                       card_ele += '</div>';
                       card_ele += '</div>';
                       card_ele += '</div>';
-                     card_ele += '<img class="medium" src='+ info.photo_url +'>';
+                      card_ele += '<img class="medium" src='+ info.photo_url +'>';
 
 
-card_ele += '<div class="bottomright">'+ info.photo_desc +'</div>';
+                      card_ele += '<div class="bottomright">'+ info.photo_desc +'</div>';
 
                       card_ele += '</div>';
                       card_ele += '<div class="content">'+info.title;
@@ -173,14 +175,8 @@ card_ele += '<div class="bottomright">'+ info.photo_desc +'</div>';
                               return card_ele;
         }
 
-        function GetLostResult()
+        function GetLostResult(isFirstSearch)
         {
-
-
-        }
-
-        $("#btnSearch_Lost").click(function(){
-
           $("#div_Lost").block({ message:"Searching....",
           css: { 
             border: 'none', 
@@ -193,23 +189,33 @@ card_ele += '<div class="bottomright">'+ info.photo_desc +'</div>';
         } });
           $(".divLoader").attr("myLoader", "visible");
           var $cardContainer = $("#divCards");
-          var $container = $("#div_Result");;
-          $cardContainer.empty();
+          
+          if (isFirstSearch=='Y') 
+          {
+            $cardContainer.empty();
+            $("#pageno").text(0);
+          }
 
-          $.post("/find_by_keyword?keyword="+$("#txtKeyword").val()+"&findCategory="+$("#ddlSearchCategory").val(), {}, function(data){
+          $.post("/find_by_keyword?keyword="+$("#txtKeyword").val()+"&findCategory="+$("#ddlSearchCategory").val()+"&pageno="+$("#pageno").text(), {}, function(data){
 
-            $.each(data, function (index, value) {
-              //$container.append(value);
-
-
-              $cardContainer.append(GetCardTemplate(value));
-
+            $.each(data, function (index, item) {
+              $cardContainer.append(GetCardTemplate(item));
+              $("#pageno").text(item.from_pageno)
             });
-
+            
             $('#div_Lost').unblock();
+            $("#btnNextSearch").show();
 
           }, "json");
 
+        }
+
+        $("#btnNextSearch").click(function(){
+          GetLostResult('N');
+        });
+
+        $("#btnSearch_Lost").click(function(){
+          GetLostResult('Y');
         });
 
        
