@@ -70,9 +70,9 @@
         <div class="ui menu" style="background-color: rgba(0, 255, 255, 0.5)">
           <a class="item"><h3 style="font-family:Gloria Hallelujah">Lost-Animal-Crawler ❤ 寵物走失協尋</h3> </a>
           <div class="right menu">
-            <a class="item" style="background-color: rgba(0, 255, 255, 0.65)"><font color="white">走失拾獲協尋</font></a>
-            <!--<div class="item"><font color="white">拾獲</font></div>-->
-            <div class="item"><font color="white">訂閱通知</font></div>
+            <div class="item" style="background-color: rgba(0, 255, 255, 0.65)"><font color="white">走失拾獲協尋</font></div>
+            <a href="http://act-adopt.ahiqo.ntpc.gov.tw/adoptlost?type=2" target="_blank" class="item"><font color="white">新北市遺失協尋</font></a>  
+            <!--<div class="item"><font color="white">訂閱通知</font></div>-->
             <a class="item" href="/about"><font color="white">關於</font></a>
           </div>
         </div>
@@ -97,11 +97,10 @@
                             </select>
                           </div>
                           <div class="three wide field">
-                                <label>性別</label>
-                                <select class="ui fluid dropdown" disabled>
-                              <option value="AL" selected>不限</option>
-                              <option value="AK">男生</option>
-                              <option value="AZ">女生</option>
+                                <label>來源</label>
+                                <select class="ui fluid dropdown" id="ddlfromWeb" disabled>
+                              <option value="ptt" selected>ptt</option>
+                              <option value="g0v">新北市遺失協尋</option>
                                 </select>
                               </div>
                               <div class="four wide field">
@@ -196,7 +195,7 @@
             $("#pageno").text(0);
           }
 
-          $.post("/find_by_keyword?keyword="+$("#txtKeyword").val()+"&findCategory="+$("#ddlSearchCategory").val()+"&pageno="+$("#pageno").text(), {}, function(data){
+          $.post("/find_by_keyword?keyword="+$("#txtKeyword").val()+"&findCategory="+$("#ddlSearchCategory").val()+"&pageno="+$("#pageno").text()+"&fromWeb="+ $("#ddlfromWeb").val(), {}, function(data){
 
             $.each(data, function (index, item) {
               $cardContainer.append(GetCardTemplate(item));
