@@ -42,22 +42,18 @@ def get_fit_data(data, keyword, base_url, remove_keywords):
 
 def get_imgur_img(imgur_url):
     photo_url=''
-    print('===========================================')
-    print(imgur_url)
     try:
         imgur_soup = crawl_data(imgur_url)
-        imgs = imgur_soup.findAll('img')
-
+        imgs = imgur_soup.findAll("link", {"rel":"image_src"})
         for img in imgs:
-            if ('.jpg' in img['src']):
-                photo_url=img['src'].encode('utf-8')
-            elif ('.png' in img['src']):
-                photo_url=img['src'].encode('utf-8')
+            if ('.jpg' in img['href']):
+                photo_url=img['href'].encode('utf-8')
+                break
+            elif ('.png' in img['href']):
+                photo_url=img['href'].encode('utf-8')
+                break
             else:
                 pass
-            if ('http' not in photo_url):
-                photo_url = 'https:' + photo_url
-        
 
     except Exception as e1:
         print(str(e1))
@@ -83,7 +79,7 @@ def get_ptt_content(ptt_article_url):
             elif ('i.imgur.com' in img['href']):
                 photo_url = img['href'].encode('utf-8')
                 photo_count+=1
-            elif ('imgur.com/a' in img['href']):
+            elif ('imgur.com' in img['href']):
                 photo_url = get_imgur_img(img['href'].encode('utf-8')).encode('utf-8')
                 photo_count+=1
             else:
@@ -93,6 +89,7 @@ def get_ptt_content(ptt_article_url):
         for d in dates:
             if (post_date==''):
                 post_date=d.text
+                break
 
     except Exception as e2:
         print(str(e2))
@@ -118,7 +115,6 @@ def get_ptt_fit_data(ptt_soup, keywords, base_url, remove_keywords, user_keyword
             
             if (check_keyword):
                 if (user_keyword in anchor.text.encode('utf-8')):
-                    print(anchor.text.encode('utf-8'))
                     catInfo = SearchInfo()
                     catInfo.title=anchor.text.encode('utf-8')
                     catInfo.url=base_url.encode('utf-8') + anchor['href'].encode('utf-8')
@@ -127,7 +123,7 @@ def get_ptt_fit_data(ptt_soup, keywords, base_url, remove_keywords, user_keyword
                     catInfo.photo_desc=''
                     catInfo.post_date, catInfo.photo_count, catInfo.photo_url, catInfo.article_content = get_ptt_content(catInfo.url)
                     if (catInfo.photo_count > 1):
-                        catInfo.photo_desc='還有'+ str(catInfo.photo_count-1) + '張'
+                        catInfo.photo_desc='1/'+ str(catInfo.photo_count)
                     
                     return_data.append(catInfo)
 
@@ -149,10 +145,10 @@ def thread_job(from_pageno, to_pageno, q, fit_titles, remove_titles, keyword):
     q.task_done()
     
 
-def crawl(keyword, findCategory, pageno):
+def ptt_crawl(keyword, findCategory, pageno):
     results=[]
     threads=[]
-    q = Queue.Queue(10)
+    q = Queue.Queue(15)
     from_pageno=0
 
     ppt_index = pageno
@@ -174,11 +170,12 @@ def crawl(keyword, findCategory, pageno):
     else:
         fit_titles.append('拾獲')
         remove_titles.append('已找到主人')
+    
+    page_size = 1
 
-<<<<<<< HEAD
-    for x in range(0, 10):
-        to_pageno = ppt_index - (10*x) 
-        from_pageno = ppt_index - (10*(x+1))+1 
+    for x in range(0, 15):
+        to_pageno = ppt_index - (page_size*x) 
+        from_pageno = ppt_index - (page_size*(x+1))+1 
 
         thread = threading.Thread(target=thread_job, args=(from_pageno, to_pageno, q, fit_titles, remove_titles, keyword),)         
         thread.setDaemon(True)
@@ -187,15 +184,6 @@ def crawl(keyword, findCategory, pageno):
     
     for _ in range(len(threads)):
         q.join()
-=======
-    for x in range(ppt_index-32, ppt_index):
-        print('https://www.ptt.cc/bbs/cat/index'+ str(x) +'.html')
-        ptt_soup = crawl_data('https://www.ptt.cc/bbs/cat/index'+ str(x) +'.html')
-        
-        return_data = get_ptt_fit_data(ptt_soup, fit_titles, 'https://www.ptt.cc',remove_titles)
-        return_data = [data for data in return_data if keyword in data.title]
-        results.extend(return_data)
->>>>>>> 6738098b602fb67c2bfc78c17c1fed39680ed359
 
     for _ in range(len(threads)):
         results.extend(q.get()) # 取出 queue 裡面的資料
