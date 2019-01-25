@@ -25,4 +25,4 @@ We crawl [PPT CAT Forum](https://www.ptt.cc/bbs/cat/index.html/) to get some los
     ◆ Basic website for crawling lost animal articles from [PPT CAT Forum](https://www.ptt.cc/bbs/cat/index.html/).
  2. Release on July, 2018.
     ◆ Multi-thread
-    ◆ Allow to crawl pervious articles.
+    ◆ Allow to crawl previous articles.
