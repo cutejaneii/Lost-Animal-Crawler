@@ -1,5 +1,5 @@
 # Lost-Animal-Crawler
-To crawl websites for getting lost animal information. (not finished, developed from June, 2018)
+To crawl websites for getting lost animal information. (developed from June, 2018)
 
 [Live Demo](https://blooming-lake-11123.herokuapp.com/)
 
