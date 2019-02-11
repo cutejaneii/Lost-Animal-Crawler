@@ -4,10 +4,10 @@ To crawl websites for getting lost animal information. (not finished, developed 
 [Demo](https://blooming-lake-11123.herokuapp.com/)
 
 ## TODO
-『√』1. Search previous articles.
-『√』 2. Multi-thread.
-『 』3. Replace "POST DATE" into real date while article had been posted.
-『』4. To crawl other lost-animal related websites.
+『√』1. Search previous articles.<br>
+『√』 2. Multi-thread.<br>
+『√』3. Replace "POST DATE" into real date while article had been posted.<br>
+『 』4. To crawl other lost-animal related websites.<br>
 
 ## How to use
 
